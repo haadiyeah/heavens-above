@@ -1,0 +1,33 @@
+name: Performance Metrics
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Lighthouse
+        uses: treosh/lighthouse-ci-action@v7
+        with:
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          budgetPath: './budget.json' # Path to your performance budget file, if you have one
+
+      - name: Echo Lighthouse Scores
+        run: cat ./lighthouse/lhr-*.json | jq '.categories | .performance.score, .accessibility.score, .best-practices.score, .seo.score, .pwa.score'

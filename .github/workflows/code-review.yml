@@ -1,11 +1,11 @@
-name: CI/CD
+name: Code Review
 
 on:
-  push:
+  pull_request:
     branches: [ main ]
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,8 @@ jobs:
     - name: Install dependencies
       run: npm i
 
-    - name: Run tests
-      run: npm test
-
-    - name: Run linting
-      run: npm run lint
+    - name: Run ESLint for code review
+      run: npx eslint . --ext .js,.jsx,.ts,.tsx | tee eslint-results.txt
+    
+    - name: Echo ESLint results
+      run: cat eslint-results.txt

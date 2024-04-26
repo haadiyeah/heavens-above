@@ -1,0 +1,14 @@
+name: Scheduled Tasks
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This means the workflow will run every day at midnight
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: scheduled-tasks
+      run: npm run scheduled-task
