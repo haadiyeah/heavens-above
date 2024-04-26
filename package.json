@@ -6,7 +6,7 @@
   "main": "run.js",
   "scripts": {
     "start": "node run.js",
-    "build": "npm install",
+    "build": "babel src -d dist",
     "lint": "eslint .",
     "scheduled-tasks": "echo \"this is a scheduled tasks\"",
     "docs": "jsdoc -c jsdoc.json"
@@ -14,7 +14,13 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "request": "^2.88.2",
-    "jsdoc": "^4.0.2"
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "jsdoc": "^4.0.2",
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2"
+    
   },
   "repository": {
     "type": "git",
