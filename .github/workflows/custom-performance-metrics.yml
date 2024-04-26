@@ -1,10 +1,8 @@
 name: Performance Metrics
 
 on:
-  workflow_run:
-    workflows: ["DeploymenttoNetlify"]
-    types: 
-      - completed 
+  push:
+    branches: [ main ]
 
 jobs:
   lighthouse:
